@@ -1,0 +1,24 @@
+{
+  "name": "star-tide-survivors",
+  "version": "1.0.0",
+  "description": "星潮幸存者 (Star Tide Survivors) — a roguelite wave-survival top-down shooter built with TypeScript + HTML5 Canvas.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "game",
+    "canvas",
+    "typescript",
+    "roguelite",
+    "survivors"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}
