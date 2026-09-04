@@ -12,16 +12,24 @@ export class AudioEngine {
 
   /** Must be triggered from a user gesture (browsers block autoplay). */
   resume() {
-    if (!this.ctx) {
-      const Ctor =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new Ctor();
-      this.master = this.ctx.createGain();
-      this.master.gain.value = 0.35;
-      this.master.connect(this.ctx.destination);
+    // Guard construction: some headless / audio-less environments throw here,
+    // and audio must never be able to break gameplay.
+    try {
+      if (!this.ctx) {
+        const Ctor =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        if (!Ctor) return;
+        this.ctx = new Ctor();
+        this.master = this.ctx.createGain();
+        this.master.gain.value = 0.35;
+        this.master.connect(this.ctx.destination);
+      }
+      void this.ctx.resume();
+    } catch {
+      this.ctx = null;
+      this.master = null;
     }
-    void this.ctx.resume();
   }
 
   toggleMute(): boolean {
