@@ -1,0 +1,16 @@
+{
+  "name": "Star Tide Survivors",
+  "install": "npm ci || npm install",
+  "terminals": [
+    {
+      "name": "dev-server",
+      "command": "npm run dev -- --host"
+    }
+  ],
+  "ports": [
+    {
+      "name": "Vite dev server",
+      "port": 5173
+    }
+  ]
+}
